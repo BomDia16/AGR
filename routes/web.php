@@ -28,6 +28,7 @@ Route::put('/documentos/update/{id}', [DocumentsController::class, 'update'])->n
 
 // requirements
 Route::post('/requisitos/store', [RequirementsController::class, 'store'])->name('requirement.store');
+Route::delete('/requisitos/destroy{id}', [RequirementsController::class, 'destroy'])->name('requirement.destroy');
 
 // Route::get('/login', function () {
 //     return view('admins.login');

@@ -270,11 +270,13 @@
                                     <th>{{ $requisito->min }}</th>
                                     <th>{{ $requisito->max }}</th>
                                     <th>
-                                        <button class="btn waves-effect waves-light blue-grey darken-3">
-                                            <a class="white-text" href="">
-                                                <i class="small material-icons">edit</i>
-                                            </a>
-                                        </button>
+                                        <form action="{{ route('requirement.destroy', $requisito->id) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn waves-effect waves-light blue-grey darken-3">
+                                                <i class="small material-icons">delete</i>
+                                            </button>
+                                        </form>
                                     </th>
                                 </tr>
                                 @empty

@@ -130,7 +130,15 @@ class AdminsController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::guard('admin')->check()) {
+            if (!$admins = $this->admin->find($id)) {          
+                return redirect()->route('admin.index');
+            }
+
+            return view('admins.edit', compact('admins'));
+        }
+
+        return redirect()->route('admin.view');
     }
 
     /**
@@ -142,7 +150,19 @@ class AdminsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!$admins = $this->admin->find($id)) {          
+            return redirect()->route('admin.index');
+        }
+
+        $dados = $request->all();
+
+        $editando = $admins->update($dados);
+
+        if($editando) {
+            return redirect()->route('admin.index');
+        }
+        
+        return redirect()->back();
     }
 
     /**
@@ -153,6 +173,8 @@ class AdminsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->admin->findOrFail($id)->delete();
+
+        return redirect()->route('admin.index');
     }
 }

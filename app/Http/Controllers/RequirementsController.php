@@ -37,4 +37,10 @@ class RequirementsController extends Controller
                 ->back()
                 ->withErrors($inserir['message']);
     }
+
+    public function destroy($id){
+        $this->requirement->findOrFail($id)->delete();
+
+        return redirect()->back();
+    }
 }
