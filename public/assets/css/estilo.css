@@ -1,0 +1,146 @@
+.logo{
+    height: 60px;
+    padding-top: 30px;
+    padding-right: 10px;
+}
+
+.titulo {
+    border-radius: 5px;
+    height: 400px;
+    border: solid black 1px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    flex-direction: column;
+}
+
+.login {
+    width: 450px;
+    margin-top: 200px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+
+.logo-login {
+    height: 50px;
+    margin-top: 5px;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+nav {
+    margin-bottom: 40px;
+}
+
+#logo {
+    border-radius: 10px;
+    height: 120px;
+    background-color: white;
+    margin-top: 8px;
+}
+
+#box-logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-texto {
+    margin-bottom: 7px;
+}
+
+button {
+    background-color: rgb(232, 236, 238);
+    border: 1px solid black;
+    border-radius: 7px;
+    height: 35px;
+}
+
+.circle {
+    border: 1px solid black;
+}
+
+.sidenav-trigger {
+    float: left;
+}
+
+.page-footer {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    margin-top: 500px;
+}
+
+#btn-cadastrar {
+    border-radius: 20px;
+}
+
+#cadastrar {
+    margin-bottom: 10px;
+    margin-left: 10px;
+    border-radius: 20px;
+}
+
+#filtro {
+    margin-left: 10px;
+}
+
+.img-produto {
+    height: 200px;
+}
+
+.fixarRodape {
+    bottom: 0;
+    position: fixed;
+    text-align: center;
+}
+
+.register {
+    width: 450px;
+    margin-top: 50px;
+    border: 1px solid black;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column
+}
+
+#compra-img {
+    width: 60%;
+    height: 300px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.alert {
+    padding: 20px;
+    background-color: green;
+    color: white;
+}
+  
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.abas {
+    padding-right: 10px;
+    width: 200px;
+}
+
+main {
+    flex: 1 0 auto;
+}
