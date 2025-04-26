@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
         <!-- Title / Icon -->
-        <title>AGR - Home-ADM</title>
+        <title>AGR - Usuários</title>
         <link rel="icon" href="https://static.wixstatic.com/media/5ae144_53127bc69c144f988ff9b7d420e65508%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/5ae144_53127bc69c144f988ff9b7d420e65508%7Emv2.png">
 
         <!-- Fonts -->
@@ -16,6 +16,49 @@
         <link rel="stylesheet" href="{{ asset('assets/frameworks/materialize/css/materialize.css') }}">
         <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
         <link href="{{ asset('assets/css/estilo.css') }}" rel="stylesheet">
+
+        <style>
+            body {font-family: Arial, Helvetica, sans-serif;}
+
+            /* The Modal (background) */
+            .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 200px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 80%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgb(0,0,0); /* Fallback color */
+            background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+            }
+
+            /* Modal Content */
+            .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            }
+
+            /* The Close Button */
+            .close {
+            color: #aaaaaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            }
+
+            .close:hover,
+            .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+            }
+        </style>
     </head>
 
     <body class="antialiased">
@@ -101,8 +144,53 @@
                 <div class="carta">
                     <div class="card">
                         <div class="card-content">
-                            <span class="card-title activator grey-text text-darken-4">Home</span>
-                            <h5>Bom dia {{ Auth::guard('admin')->user()->name }} - Admin</h5>
+                            <span class="card-title activator grey-text text-darken-4">Usuários</span>
+                            <button id="btn-cadastrar" class="btn waves-effect waves-light blue-grey darken-3" name="action">
+                                <a class="white-text" href="{{ route('user.create') }}">Create</a>
+                                <i class="material-icons right">add</i>
+                            </button>
+                        </div>
+                        <hr>
+
+                        <div class="card-image waves-effect waves-block waves-light">
+                            <table class="striped responsive-table">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nome</th>
+                                        <th>Email</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @forelse($users as $user)
+                                    <tr>
+                                        <th>{{ $user->id }}</th>
+                                        <th>{{ $user->name }}</th>
+                                        <th>{{ $user->email }}</th>
+                                        <th>
+                                            <button class="btn waves-effect waves-light blue-grey darken-3">
+                                                <a class="white-text" href="{{ route('user.edit', $user->id) }}">
+                                                    <i class="small material-icons">edit</i>
+                                                </a>
+                                            </button>
+                                            
+                                        </th>
+                                        <th>
+                                            <form action="{{ route('user.destroy', $user->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn waves-effect waves-light blue-grey darken-3">
+                                                    <i class="small material-icons">delete</i>
+                                                </button>
+                                            </form>
+                                        </th>
+                                    </tr>
+                                    @empty
+                                    @endforelse
+                                </tbody>
+                            </table>
+                            {!! $users->links('vendor.pagination') !!}
                         </div>
                     </div>
                 </div>

@@ -4,10 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
     private $user;
+    
+    private $totalPage = 10;
 
     public function __construct(User $user)
     {
@@ -21,7 +24,13 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        $users = $this->user->orderBy('id', 'ASC')->paginate($this->totalPage);
+
+        if (Auth::guard('admin')->check()) {
+            return view('users.index',
+                                    compact('users'));
+        }
+        return redirect()->route('admin.view');
     }
 
     /**
@@ -31,7 +40,15 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        if (Auth::guard('admin')->check()) {
+            return view('users.create');
+            /*
+                Lembre-se disso:
+                Auth::guard('admin')->user()->id
+            */
+        }
+        // return view('admins.home');
+        return redirect()->route('admin.view');
     }
 
     /**
@@ -42,7 +59,15 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $dados = $request->all();
+        
+        $inserir = $this->user->inserir($dados);
+        if($inserir['status']) {
+            return redirect()->route('user.index');
+        }
+        return redirect()
+                ->back()
+                ->withErrors($inserir['message']);
     }
 
     /**
@@ -64,7 +89,15 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        if (Auth::guard('admin')->check()) {
+            if (!$users = $this->user->find($id)) {          
+                return redirect()->route('user.index');
+            }
+
+            return view('users.edit', compact('users'));
+        }
+
+        return redirect()->route('admin.view');
     }
 
     /**
@@ -76,7 +109,19 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        if (!$users = $this->user->find($id)) {          
+            return redirect()->route('user.index');
+        }
+
+        $dados = $request->all();
+
+        $editando = $users->update($dados);
+
+        if($editando) {
+            return redirect()->route('user.index');
+        }
+        
+        return redirect()->back();
     }
 
     /**
@@ -87,6 +132,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $this->user->findOrFail($id)->delete();
+
+        return redirect()->route('user.index');
     }
 }

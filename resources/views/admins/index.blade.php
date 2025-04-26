@@ -37,6 +37,10 @@
 						<i class="material-icons">description</i>
 						Documentos
 					</a>
+                    <a href="{{ route('user.index') }}" class="white-text">
+						<i class="material-icons">person</i>
+						Usuários
+					</a>
                     <a href="" class="white-text">
 						<i class="material-icons">done</i>
 						Requisições

@@ -23,6 +23,26 @@ class User extends Authenticatable
         'password',
     ];
 
+    public function inserir($dados) {
+        $cadastrar = $this->create([
+            'name'          => $dados['name'],
+            'email'         => $dados['email'],
+            'password'      => bcrypt($dados['password']),
+        ]);
+
+        if($cadastrar){
+            return [
+                'status' => true,
+                'message' => 'Sucesso ao cadastrar o admin!'
+            ];
+        } else {
+            return [
+                'status' => false,
+                'message' => 'Falha ao cadastrar o admin!',
+            ];
+        }
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

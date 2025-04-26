@@ -83,4 +83,11 @@ class DocumentsController extends Controller
         
         return redirect()->back();
     }
+
+    public function destroy($id)
+    {
+        $this->document->findOrFail($id)->delete();
+
+        return redirect()->route('document.index');
+    }
 }

@@ -80,6 +80,10 @@
 						<i class="material-icons">description</i>
 						Documentos
 					</a>
+                    <a href="{{ route('user.index') }}" class="white-text">
+						<i class="material-icons">person</i>
+						Usuários
+					</a>
                     <a href="" class="white-text">
 						<i class="material-icons">done</i>
 						Requisições
@@ -177,7 +181,15 @@
                                                     <i class="small material-icons">edit</i>
                                                 </a>
                                             </button>
-                                            
+                                        </th>
+                                        <th>
+                                            <form action="{{ route('document.destroy', $document->id) }}" method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn waves-effect waves-light blue-grey darken-3">
+                                                    <i class="small material-icons">delete</i>
+                                                </button>
+                                            </form>
                                         </th>
                                     </tr>
                                     @empty
