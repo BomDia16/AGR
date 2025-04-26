@@ -19,6 +19,7 @@
     </head>
 
     <body class="antialiased">
+        <a href="{{ route('admin.index') }}">Voltar</a>
         <div class="grey lighten-2 login container">
             <img class="logo-login" src="https://static.wixstatic.com/media/5ae144_53127bc69c144f988ff9b7d420e65508%7Emv2.png/v1/fill/w_192%2Ch_192%2Clg_1%2Cusm_0.66_1.00_0.01/5ae144_53127bc69c144f988ff9b7d420e65508%7Emv2.png">
             <h3>Edit</h3>
